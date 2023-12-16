@@ -1,0 +1,114 @@
+{
+  "name": "org1-network",
+  "version": "1.0.0",
+  "client": {
+    "tlsEnable": true,
+    "adminCredential": {
+      "id": "exploreradmin",
+      "password": "exploreradminpw"
+    },
+    "enableAuthentication": true,
+    "organization": "orgMSP",
+    "connection": {
+      "timeout": {
+        "peer": {
+          "endorser": "300"
+        },
+        "orderer": "300"
+      }
+    }
+  },
+  "channels": {
+    "channel-1": {
+      "peers": {
+        "peer0.org.test.com": {
+          "endorsingPeer": true,
+          "chaincodeQuery": true,
+          "ledgerQuery": true,
+          "eventSource": true
+        },
+        "peer1.org.test.com": {
+          "endorsingPeer": true,
+          "chaincodeQuery": true,
+          "ledgerQuery": true,
+          "eventSource": true
+        },
+        "peer2.org.test.com": {
+          "endorsingPeer": true,
+          "chaincodeQuery": true,
+          "ledgerQuery": true,
+          "eventSource": true
+        },
+        "peer3.org.test.com": {
+          "endorsingPeer": true,
+          "chaincodeQuery": true,
+          "ledgerQuery": true,
+          "eventSource": true
+        }
+      }
+    }
+  },
+  "organizations": {
+    "orgMSP": {
+      "mspid": "orgMSP",
+      "peers": [
+        "peer0.org.test.com",
+        "peer1.org.test.com",
+        "peer2.org.test.com",
+        "peer3.org.test.com"
+      ],
+      "adminPrivateKey": {
+        "path": "/tmp/crypto/peerOrganizations/org.test.com/users/Admin@org.test.com/msp/keystore/priv_sk"
+      },
+      "signedCert": {
+        "path": "/tmp/crypto/peerOrganizations/org.test.com/users/Admin@org.test.com/msp/signcerts/Admin@org.test.com-cert.pem"
+      }
+    }
+  },
+  "peers": {
+    "peer0.org.test.com": {
+      "url": "grpcs://peer0.org.test.com:7051",
+      "grpcOptions": {
+        "ssl-target-name-override": "peer0.org.test.com",
+        "hostnameOverride": "peer0.org.test.com",
+        "request-timeout": 120001
+      },
+      "tlsCACerts": {
+        "path": "/tmp/crypto/peerOrganizations/org.test.com/peers/peer0.org.test.com/tls/ca.crt"
+      }
+    },
+    "peer1.org.test.com": {
+      "url": "grpcs://peer1.org.test.com:7051",
+      "grpcOptions": {
+        "ssl-target-name-override": "peer1.org.test.com",
+        "hostnameOverride": "peer1.org.test.com",
+        "request-timeout": 120001
+      },
+      "tlsCACerts": {
+        "path": "/tmp/crypto/peerOrganizations/org.test.com/peers/peer1.org.test.com/tls/ca.crt"
+      }
+    },
+    "peer2.org.test.com": {
+      "url": "grpcs://peer2.org.test.com:7051",
+      "grpcOptions": {
+        "ssl-target-name-override": "peer2.org.test.com",
+        "hostnameOverride": "peer2.org.test.com",
+        "request-timeout": 120001
+      },
+      "tlsCACerts": {
+        "path": "/tmp/crypto/peerOrganizations/org.test.com/peers/peer2.org.test.com/tls/ca.crt"
+      }
+    },
+    "peer3.org.test.com": {
+      "url": "grpcs://peer3.org.test.com:7051",
+      "grpcOptions": {
+        "ssl-target-name-override": "peer3.org.test.com",
+        "hostnameOverride": "peer3.org.test.com",
+        "request-timeout": 120001
+      },
+      "tlsCACerts": {
+        "path": "/tmp/crypto/peerOrganizations/org.test.com/peers/peer3.org.test.com/tls/ca.crt"
+      }
+    }
+  }
+}
