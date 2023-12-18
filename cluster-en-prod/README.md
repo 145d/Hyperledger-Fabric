@@ -16,15 +16,15 @@ scp -r /etc/hosts peer0.org2.example.com:/etc/hosts
 2.启动网络
 cd /data/fabric/fabric-samples/test-network
 [root@orderer1 test-network]# ./network.sh up
-scp -r organizations orderer2.example.com:/data/fabric/fabric-samples/test-network
-scp -r organizations orderer3.example.com:/data/fabric/fabric-samples/test-network
-scp -r organizations peer0.org1.example.com:/data/fabric/fabric-samples/test-network
-scp -r organizations peer0.org2.example.com:/data/fabric/fabric-samples/test-network
+scp -rq organizations orderer2.example.com:/data/fabric/fabric-orderer2/test-network
+scp -rq organizations orderer3.example.com:/data/fabric/fabric-orderer3/test-network
+scp -rq organizations peer0.org1.example.com:/data/fabric/fabric-peer1/test-network
+scp -rq organizations peer0.org2.example.com:/data/fabric/fabric-peer2/test-network
 传输完之后启动这四台./network.sh up
 3.orderer集群搭建
 [root@orderer1 test-network]# ./network.sh createChannel -c carbonchain
-scp -r channel-artifacts/ peer0.org1.example.com:/data/fabric/fabric-samples/test-network
-scp -r channel-artifacts/ peer0.org2.example.com:/data/fabric/fabric-samples/test-network
+scp -r channel-artifacts/ peer0.org1.example.com:/data/fabric/fabric-peer1/test-network
+scp -r channel-artifacts/ peer0.org2.example.com:/data/fabric/fabric-peer2/test-network
 
 【2】peer
 [root@peer1 test-network]# ./network.sh createChannel -c carbonchain
