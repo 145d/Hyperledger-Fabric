@@ -49,6 +49,11 @@ cd /data/fabric/fabric-peer3/test-network/addOrg3
 **3、Set environment**
 
 ```shell
+cd /data/fabric/fabric-peer3/asset-transfer-basic/chaincode-go
+go env -w GOPROXY=https://goproxy.io,direct
+go env -w GO111MODULE=on
+go mod vendor
+cd /data/fabric/fabric-peer3/test-network
 export PATH=${PWD}/../bin:$PATH
 export FABRIC_CFG_PATH=$PWD/../config/
 export CORE_PEER_TLS_ENABLED=true
@@ -66,7 +71,7 @@ scp -r basic.tar.gz peer0.org1.example.com:/data/fabric/fabric-peer1/test-networ
 scp -r basic.tar.gz peer0.org2.example.com:/data/fabric/fabric-peer2/test-network
 ```
 
-**5、安装链代码包**
+**5、安装链代码包(所有 peer)**
 
 ```shell
 [root@peer3 test-network]# peer lifecycle chaincode install basic.tar.gz
@@ -98,9 +103,9 @@ Package ID: basic_1:ef2394600055b69053a488d0ea2ac66bd544e93bb1b272a68d8860df5ac8
 [root@peer3 test-network]# peer lifecycle chaincode approveformyorg -o orderer.example.com:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" --channelID carbonchain --name basic --version 1.0 --package-id $CC_PACKAGE_ID --sequence 1
 ```
 
-**9、peer1**
+**9、peer1 批准**
 
-```shelll
+```shell
 export PATH=${PWD}/../bin:$PATH
 export FABRIC_CFG_PATH=$PWD/../config/
 export CORE_PEER_TLS_ENABLED=true
@@ -113,7 +118,7 @@ export CC_PACKAGE_ID=basic_1:ef2394600055b69053a488d0ea2ac66bd544e93bb1b272a68d8
 peer lifecycle chaincode approveformyorg -o orderer.example.com:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" --channelID carbonchain --name basic --version 1.0 --package-id $CC_PACKAGE_ID --sequence 1
 ```
 
-**10、peer2**
+**10、peer2 批准**
 
 ```shell
 export PATH=${PWD}/../bin:$PATH
@@ -144,7 +149,7 @@ Committed chaincode definition for chaincode 'basic' on channel 'carbonchain':(�
 Version: 1.0, Sequence: 1, Endorsement Plugin: escc, Validation Plugin: vscc, Approvals: [Org1MSP: true, Org2MSP: true, Org3MSP: true]
 ```
 
-**13、Org3 在批准提交给通道的链码定义后可以使用基本链码。**
+**13、Org3 在批准提交给通道的链码定义后可以使用基本链码**
 
 > 链码定义使用默认的`背书(endorsement )策略`，这需要通道上的大多数组织对交易进行赞同。这意味着如果一个组织被添加到通道或从通道中删除，背书策略将自动更新。我们之前需要 Org1 和 Org2 的认可（二选二）。现在我们需要 Org1、Org2 和 Org3 中的两个组织的认可（3 个中的 2 个）。
 > 查询账本确保链码已经在 Org3 节点运行。注意我们此时需要链码容器启动
