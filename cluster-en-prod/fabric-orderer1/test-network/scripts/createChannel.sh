@@ -44,11 +44,11 @@ createChannelGenesisBlock() {
 	fi
 	res=$?
 	{ set +x; } 2>/dev/null
-  verifyResult $res "Failed to generate channel configuration transaction..."
+  verifyResult $res "Failed to generate channel configuration transaction(生成通道配置事务失败。处理步骤)..."
 }
 
 createChannel() {
-	# Poll in case the raft leader is not set yet
+	# Poll in case the raft leader is not set yet(投票，以防木筏队长还没确定)
 	local rc=1
 	local COUNTER=1
 	local bft_true=$1

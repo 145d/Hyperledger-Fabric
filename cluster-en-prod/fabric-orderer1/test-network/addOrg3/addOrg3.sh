@@ -256,7 +256,7 @@ while [[ $# -ge 1 ]] ; do
 done
 
 
-# Determine whether starting, stopping, restarting or generating for announce
+# Determine whether starting, stopping, restarting or generating for announce(确定是否为宣布启动、停止、重新启动或生成)
 if [ "$MODE" == "up" ]; then
   infoln "Adding org3 to channel '${CHANNEL_NAME}' with '${CLI_TIMEOUT}' seconds and CLI delay of '${CLI_DELAY}' seconds and using database '${DATABASE}'"
   echo

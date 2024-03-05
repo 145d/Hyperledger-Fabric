@@ -13,7 +13,8 @@ function printHelp() {
     println "Usage: "
     println "  network.sh <Mode> [Flags]"
     println "    Modes:"
-    println "      \033[0;32mprereq\033[0m - Install Fabric binaries and docker images"
+    println "      \033[0;32mprereq\033[0m - Install Fabric binaries and docker images(安装Fabric二进制文件和docker镜像
+)"
     println
     println "    Flags:"
     println "    Used with \033[0;32mnetwork.sh prereq\033[0m:"
@@ -115,13 +116,13 @@ function printHelp() {
     println "  network.sh cc <Mode> [Flags]"
     println
     println "    Modes:"
-    println "      \033[0;32mlist\033[0m - list chaincodes installed on a peer and committed on a channel"
-    println "      \033[0;32mpackage\033[0m - package a chaincode in tar format. Stores in directory packagedChaincode"
-    println "      \033[0;32minvoke\033[0m - execute an invoke operation"
-    println "      \033[0;32mquery\033[0m - execute an query operation"
+    println "      \033[0;32mlist\033[0m - list chaincodes installed on a peer and committed on a channel(列出在对等节点上安装并在通道上提交的链码)"
+    println "      \033[0;32mpackage\033[0m - package a chaincode in tar format. Stores in directory packagedChaincode(将链码打包成tar格式。存储在目录packagedChaincode)"
+    println "      \033[0;32minvoke\033[0m - execute an invoke operation(执行调用操作)"
+    println "      \033[0;32mquery\033[0m - execute an query operation(执行查询操作)"
     println
     println "    Flags:"
-    println "    -org <number>     - Org number for the executing the command (1,2,etc) (default is 1)."    
+    println "    -org <number>     - Org number for the executing the command(执行命令的组织编号) (1,2,etc) (default is 1)."    
     println "    -c <channel name> - Name of channel"
     println "    -ccn <name>       - Chaincode name."
     println "    -ccl <language>   - Programming language of chaincode to deploy: go, java, javascript, typescript"
@@ -131,7 +132,7 @@ function printHelp() {
     println "    -ccqc <string>    - Chaincode query constructor."
     println "    -h                - Print this message"
     println
-    println "   Possible Mode and flag combinations"
+    println "   Possible Mode and flag combinations()"
     println "     \033[0;32mcc list\033[0m -org -verbose"
     println "     \033[0;32mcc package\033[0m -ccn -ccl -ccv -ccp -verbose"
     println "     \033[0;32mcc invoke\033[0m -org -c -ccic -verbose"
@@ -143,19 +144,19 @@ function printHelp() {
     println "   network.sh cc invoke -c channel1 -ccic '{\"Args\":[\"CreateAsset\",\"asset1\",\"red\",\"10\",\"fred\",\"500\"]}'"
     println "   network.sh cc query -c channel1 -ccqc '{\"Args\":[\"ReadAsset\",\"asset1\"]}'"
     println
-    println " NOTE: Default settings can be changed in network.config"
+    println " NOTE: Default settings can be changed in network.config(默认设置可以在network.config中修改)"
     println
   else
     println "Usage: "
     println "  network.sh <Mode> [Flags]"
     println "    Modes:"
-    println "      \033[0;32mprereq\033[0m - Install Fabric binaries and docker images"
-    println "      \033[0;32mup\033[0m - Bring up Fabric orderer and peer nodes. No channel is created"
-    println "      \033[0;32mup createChannel\033[0m - Bring up fabric network with one channel"
-    println "      \033[0;32mcreateChannel\033[0m - Create and join a channel after the network is created"
-    println "      \033[0;32mdeployCC\033[0m - Deploy a chaincode to a channel (defaults to asset-transfer-basic)"
-    println "      \033[0;32mcc\033[0m - chaincode functions, use \"network.sh cc -h\" for options"
-    println "      \033[0;32mdown\033[0m - Bring down the network"
+    println "      \033[0;32mprereq\033[0m - Install Fabric binaries and docker images(安装Fabric二进制文件和docker镜像)"
+    println "      \033[0;32mup\033[0m - Bring up Fabric orderer and peer nodes. No channel is created(调出Fabric排序器和对等节点。没有创建通道)"
+    println "      \033[0;32mup createChannel\033[0m - Bring up fabric network with one channel(带一个通道的fabric网络)"
+    println "      \033[0;32mcreateChannel\033[0m - Create and join a channel after the network is created(创建网络后，创建通道并加入通道)"
+    println "      \033[0;32mdeployCC\033[0m - Deploy a chaincode to a channel(将链码部署到通道) (defaults to asset-transfer-basic)"
+    println "      \033[0;32mcc\033[0m - chaincode functions, use \"network.sh cc -h\" for options[链码函数，使用\"network.sh cc -h\"作为选项]"
+    println "      \033[0;32mdown\033[0m - Bring down the network(关掉网络)"
     println
     println "    Flags:"
     println "    Used with \033[0;32mnetwork.sh prereq\033[0m"

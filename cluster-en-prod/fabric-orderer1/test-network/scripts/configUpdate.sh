@@ -8,9 +8,9 @@
 # import utils
 . scripts/envVar.sh
 
-# fetchChannelConfig <org> <channel_id> <output_json>
-# Writes the current channel config for a given channel to a JSON file
-# NOTE: this must be run in a CLI container since it requires configtxlator
+# fetchChannelConfig <org> <channel_id> <output_json>(获取通道配置)
+# Writes the current channel config for a given channel to a JSON file(将给定通道的当前通道配置写入JSON文件)
+# NOTE: this must be run in a CLI container since it requires configtxlator(它必须在CLI容器中运行，因为它需要configtxlator)
 fetchChannelConfig() {
   ORG=$1
   CHANNEL=$2
@@ -18,7 +18,7 @@ fetchChannelConfig() {
 
   setGlobals $ORG
 
-  infoln "Fetching the most recent configuration block for the channel"
+  infoln "Fetching the most recent configuration block for the channel(获取通道的最新配置块)"
   set -x
   peer channel fetch config config_block.pb -o orderer.example.com:7050 --ordererTLSHostnameOverride orderer.example.com -c $CHANNEL --tls --cafile "$ORDERER_CA"
   { set +x; } 2>/dev/null
@@ -51,7 +51,7 @@ createConfigUpdate() {
 }
 
 # signConfigtxAsPeerOrg <org> <configtx.pb>
-# Set the peerOrg admin of an org and sign the config update
+# Set the peerOrg admin of an org and sign the config update(设置组织的peerOrg管理员并在配置更新中签名)
 signConfigtxAsPeerOrg() {
   ORG=$1
   CONFIGTXFILE=$2

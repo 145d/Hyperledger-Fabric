@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# This script uses the logspout and http stream tools to let you watch the docker containers
-# in action.
+# This script uses the logspout and http stream tools to let you watch the docker containers in action（这个脚本使用logspout和http流工具来观察docker容器的运行情况）
 #
 # More information at https://github.com/gliderlabs/logspout/tree/master/httpstream
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-
+# setOrgEnv.sh中有ORDERER_CA的变量
 channel_name=$1
 
 export PATH=${ROOTDIR}/../bin:${PWD}/../bin:$PATH

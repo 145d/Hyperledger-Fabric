@@ -49,4 +49,4 @@ set -x
 peer channel update -f org3_update_in_envelope.pb -c ${CHANNEL_NAME} -o orderer.example.com:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile "$ORDERER_CA"
 { set +x; } 2>/dev/null
 
-successln "Config transaction to add org3 to network submitted"
+successln "Config transaction to add org3 to network submitted(配置事务，将组织3添加到提交的网络中)"

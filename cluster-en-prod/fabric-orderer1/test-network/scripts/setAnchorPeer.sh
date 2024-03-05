@@ -10,7 +10,7 @@
 . scripts/configUpdate.sh
 
 
-# NOTE: this must be run in a CLI container since it requires jq and configtxlator 
+# NOTE: this must be run in a CLI container since it requires jq and configtxlator(它必须在CLI容器中运行，因为它需要jq和configtxlator)
 createAnchorPeerUpdate() {
   infoln "Fetching channel config for channel $CHANNEL_NAME"
   fetchChannelConfig $ORG $CHANNEL_NAME ${CORE_PEER_LOCALMSPID}config.json
@@ -31,13 +31,11 @@ createAnchorPeerUpdate() {
   fi
 
   set -x
-  # Modify the configuration to append the anchor peer 
+  # Modify the configuration to append the anchor peer(修改配置以附加锚对等体)
   jq '.channel_group.groups.Application.groups.'${CORE_PEER_LOCALMSPID}'.values += {"AnchorPeers":{"mod_policy": "Admins","value":{"anchor_peers": [{"host": "'$HOST'","port": '$PORT'}]},"version": "0"}}' ${CORE_PEER_LOCALMSPID}config.json > ${CORE_PEER_LOCALMSPID}modified_config.json
   { set +x; } 2>/dev/null
 
-  # Compute a config update, based on the differences between 
-  # {orgmsp}config.json and {orgmsp}modified_config.json, write
-  # it as a transaction to {orgmsp}anchors.tx
+  # Compute a config update, based on the differences between  {orgmsp}config.json and {orgmsp}modified_config.json, write it as a transaction to {orgmsp}anchors.tx(根据{orgmsp}config之间的差异计算配置更新。{orgmsp}modified_config。Json，将其作为事务写入{orgmsp}anchors.tx)
   createConfigUpdate ${CHANNEL_NAME} ${CORE_PEER_LOCALMSPID}config.json ${CORE_PEER_LOCALMSPID}modified_config.json ${CORE_PEER_LOCALMSPID}anchors.tx
 }
 
