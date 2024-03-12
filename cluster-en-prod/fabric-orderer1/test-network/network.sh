@@ -94,14 +94,14 @@ function checkPrereqs() {
     fi
   done
 
-  ## check for cfssl binaries
+  ## check for cfssl binaries(检查CFSSL二进制文件)
   if [ "$CRYPTO" == "cfssl" ]; then
   
     cfssl version > /dev/null 2>&1
     if [[ $? -ne 0 ]]; then
       errorln "cfssl binary not found.."
       errorln
-      errorln "Follow the instructions to install the cfssl and cfssljson binaries:"
+      errorln "Follow the instructions to install the cfssl and cfssljson binaries:(按照下面的说明安装cfssl和cfssljson二进制文件:)"
       errorln "https://github.com/cloudflare/cfssl#installation"
       exit 1
     fi
@@ -114,7 +114,7 @@ function checkPrereqs() {
     if [[ $? -ne 0 ]]; then
       errorln "fabric-ca-client binary not found.."
       errorln
-      errorln "Follow the instructions in the Fabric docs to install the Fabric Binaries:"
+      errorln "Follow the instructions in the Fabric docs to install the Fabric Binaries:(按照Fabric文档中的说明安装Fabric二进制文件)"
       errorln "https://hyperledger-fabric.readthedocs.io/en/latest/install.html"
       exit 1
     fi
@@ -124,7 +124,7 @@ function checkPrereqs() {
     infoln "CA_DOCKER_IMAGE_VERSION=$CA_DOCKER_IMAGE_VERSION"
 
     if [ "$CA_LOCAL_VERSION" != "$CA_DOCKER_IMAGE_VERSION" ]; then
-      warnln "Local fabric-ca binaries and docker images are out of sync. This may cause problems."
+      warnln "Local fabric-ca binaries and docker images are out of sync. This may cause problems(本地fabric-ca二进制文件和docker镜像不同步。这可能会导致问题)"
     fi
   fi
 }
@@ -159,7 +159,7 @@ function createOrgs() {
     rm -Rf organizations/peerOrganizations && rm -Rf organizations/ordererOrganizations
   fi
 
-  # Create crypto material using cryptogen
+  # Create crypto material using cryptogen(使用cryptogen创建加密材料)
   if [ "$CRYPTO" == "cryptogen" ]; then
     which cryptogen
     if [ "$?" -ne 0 ]; then
@@ -219,16 +219,16 @@ function createOrgs() {
 
   fi 
 
-  # Create crypto material using Fabric CA
+  # Create crypto material using Fabric CA(使用Fabric CA创建加密材料)
   if [ "$CRYPTO" == "Certificate Authorities" ]; then
-    infoln "Generating certificates using Fabric CA"
+    infoln "Generating certificates using Fabric CA(使用Fabric CA生成证书)"
     ${CONTAINER_CLI_COMPOSE} -f compose/$COMPOSE_FILE_CA -f compose/$CONTAINER_CLI/${CONTAINER_CLI}-$COMPOSE_FILE_CA up -d 2>&1
 
     . organizations/fabric-ca/registerEnroll.sh
 
     while :
     do
-      if [ ! -f "organizations/fabric-ca/org1/tls-cert.pem" ]; then
+      if [ ! -f "organizations/fabric-ca/ordererOrg/tls-cert.pem" ]; then
         sleep 1
       else
         break
@@ -236,11 +236,9 @@ function createOrgs() {
     done
 
     infoln "Creating Org1 Identities"
-
     createOrg1
 
     infoln "Creating Org2 Identities"
-
     createOrg2
 
     infoln "Creating Orderer Org Identities"
@@ -249,8 +247,8 @@ function createOrgs() {
 
   fi
 
-  infoln "Generating CCP files for Org1 and Org2"
-  ./organizations/ccp-generate.sh
+  #infoln "Generating CCP files for Org1 and Org2(生成组织1和组织2的CCP文件)"
+  #./organizations/ccp-generate.sh
 }
 
 # Once you create the organization crypto material, you need to create the
@@ -303,8 +301,8 @@ function networkUp() {
   fi
 }
 
-# call the script to create the channel, join the peers of org1 and org2,
-# and then update the anchor peers for each organization
+# call the script to create the channel, join the peers of org1 and org2,and then update the anchor peers for each 
+# 调用脚本创建通道，加入org1和org2的对等体，然后为每个组织更新锚点对等体
 function createChannel() {
   # Bring up the network if it is not already up.
   bringUpNetwork="false"
@@ -315,12 +313,12 @@ function createChannel() {
     fatalln "$CONTAINER_CLI network is required to be running to create a channel"
   fi
 
-  # check if all containers are present
+  # check if all containers are present(检查是否所有的容器都在)
   CONTAINERS=($($CONTAINER_CLI ps | grep hyperledger/ | awk '{print $2}'))
   len=$(echo ${#CONTAINERS[@]})
 
   if [[ $len -ge 4 ]] && [[ ! -d "organizations/peerOrganizations" ]]; then
-    echo "Bringing network down to sync certs with containers"
+    echo "Bringing network down to sync certs with containers(将网络关闭以与容器同步证书)"
     networkDown
   fi
 
@@ -331,8 +329,7 @@ function createChannel() {
     networkUp
   fi
 
-  # now run the script that creates a channel. This script uses configtxgen once
-  # to create the channel creation transaction and the anchor peer updates.
+  # now run the script that creates a channel. This script uses configtxgen once to create the channel creation transaction and the anchor peer updates(现在运行创建通道的脚本。该脚本使用configtxgen一次创建通道创建事务和锚点对等点更新)
   scripts/createChannel.sh $CHANNEL_NAME $CLI_DELAY $MAX_RETRY $VERBOSE $bft_true
 }
 
@@ -462,17 +459,17 @@ function networkDown() {
 
 . ./network.config
 
-# use this as the default docker-compose yaml definition
+# use this as the default docker-compose yaml definition(使用它作为默认的docker-compose yaml定义)
 COMPOSE_FILE_BASE=compose-test-net.yaml
-# docker-compose.yaml file if you are using couchdb
+# docker-compose.yaml file if you are using couchdb(如果您正在使用couchdb，请使用这个)
 COMPOSE_FILE_COUCH=compose-couch.yaml
-# certificate authorities compose file
+# certificate authorities compose file(证书颁发机构compose文件)
 COMPOSE_FILE_CA=compose-ca.yaml
-# use this as the default docker-compose yaml definition for org3
+# use this as the default docker-compose yaml definition for org3(使用它作为org3的默认docker-compose yaml定义)
 COMPOSE_FILE_ORG3_BASE=compose-org3.yaml
-# use this as the docker compose couch file for org3
+# use this as the docker compose couch file for org3(将此文件用作org3的docker-compose库文件)
 COMPOSE_FILE_ORG3_COUCH=compose-couch-org3.yaml
-# certificate authorities compose file
+# certificate authorities compose file(证书颁发机构compose文件)
 COMPOSE_FILE_ORG3_CA=compose-ca-org3.yaml
 #
 
@@ -619,9 +616,9 @@ while [[ $# -ge 1 ]] ; do
   shift
 done
 
-## Check if user attempts to use BFT orderer and CA together
+## Check if user attempts to use BFT orderer and CA together(检查用户是否尝试同时使用BFT orderer和CA)
 if [[ $BFT -eq 1 && "$CRYPTO" == "Certificate Authorities" ]]; then
-  fatalln "This sample does not yet support the use of consensus type BFT and CA together."
+  fatalln "This sample does not yet support the use of consensus type BFT and CA together(这个样本还不支持将共识型BFT和CA一起使用)."
 fi
 
 if [ $BFT -eq 1 ]; then
@@ -636,7 +633,7 @@ else
   CRYPTO_MODE=""
 fi
 
-# Determine mode of operation and printing out what we asked for
+# Determine mode of operation and printing out what we asked for(确定操作模式并打印出我们要求的内容)
 if [ "$MODE" == "prereq" ]; then
   infoln "Installing binaries and fabric images. Fabric Version: ${IMAGETAG}  Fabric CA Version: ${CA_IMAGETAG}"
   installPrereqs

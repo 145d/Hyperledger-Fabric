@@ -53,8 +53,8 @@ function printHelp() {
     println "    Flags:"
     println "    -bft - Use Orderers with consensus type BFT (Not available in Fabric v2.x)"
     println "    -c <channel name> - Name of channel to create (defaults to \"mychannel\")"
-    println "    -r <max retry> - CLI times out after certain number of attempts (defaults to 5)"
-    println "    -d <delay> - CLI delays for a certain number of seconds (defaults to 3)"
+    println "    -r <max retry> - CLI times out after certain number of attempts(日志含义CLI尝试一定次数后超时) (defaults to 5)"
+    println "    -d <delay> - CLI delays for a certain number of seconds(CLI延迟一定的秒数) (defaults to 3)"
     println "    -verbose - Verbose mode"
     println
     println "    -h - Print this message"

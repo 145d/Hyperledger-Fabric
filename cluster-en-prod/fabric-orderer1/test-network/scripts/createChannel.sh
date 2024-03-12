@@ -100,9 +100,9 @@ setAnchorPeer() {
 }
 
 
-## User attempts to use BFT orderer in Fabric network with CA
+## User attempts to use BFT orderer in Fabric network with CA（用户试图在Fabric网络中与CA一起使用BFT排序器）
 if [ $BFT -eq 1 ] && [ -d "organizations/fabric-ca/ordererOrg/msp" ]; then
-  fatalln "Fabric network seems to be using CA. This sample does not yet support the use of consensus type BFT and CA together."
+  fatalln "Fabric network seems to be using CA. This sample does not yet support the use of consensus type BFT and CA together(Fabric网络似乎正在使用CA。本示例尚不支持将共识型BFT和CA一起使用)."
 fi
 
 ## Create channel genesis block

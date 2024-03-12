@@ -25,7 +25,7 @@ function printHelp() {
     println "  network.sh \033[0;32mup\033[0m [Flags]"
     println
     println "    Flags:"
-    println "    -ca - Use Certificate Authorities to generate network crypto material"
+    println "    -ca - Use Certificate Authorities to generate network crypto material(使用证书颁发机构生成网络加密材料)"
     println "    -cfssl <use CFSSL> -  Use CFSSL CA to generate network crypto material"
     println "    -bft - Use Orderers with consensus type BFT (Not available in Fabric v2.x)"
     println "    -c <channel name> - Name of channel to create (defaults to \"mychannel\")"

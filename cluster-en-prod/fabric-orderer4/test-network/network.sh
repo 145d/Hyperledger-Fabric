@@ -299,7 +299,7 @@ function networkUp() {
 
   $CONTAINER_CLI ps -a
   if [ $? -ne 0 ]; then
-    fatalln "Unable to start network"
+    fatalln "Unable to start network(无法启动这个网络)"
   fi
 }
 
@@ -636,7 +636,7 @@ else
   CRYPTO_MODE=""
 fi
 
-# Determine mode of operation and printing out what we asked for
+# Determine mode of operation and printing out what we asked for(确定操作模式并打印出我们要求的内容)
 if [ "$MODE" == "prereq" ]; then
   infoln "Installing binaries and fabric images. Fabric Version: ${IMAGETAG}  Fabric CA Version: ${CA_IMAGETAG}"
   installPrereqs

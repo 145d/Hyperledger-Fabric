@@ -1,6 +1,7 @@
 #!/bin/bash
 
-
+# ORDERER_CA的环境变量来自于setOrgEnv.sh 
+# ORDERER_CA=${DIR}/test-network/organizations/ordererOrganizations/example.com/tlsca/tlsca.example.com-cert.pem
 channel_name=$1
 
 export PATH=${ROOTDIR}/../bin:${PWD}/../bin:$PATH
