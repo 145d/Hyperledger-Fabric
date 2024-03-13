@@ -36,7 +36,7 @@ function printHelp () {
   echo "      - 'down' - bring down the test network and org3 nodes"
   echo "      - 'generate' - generate required certificates and org definition"
   echo "    -c <channel name> - test network channel name (defaults to \"mychannel\")"
-  echo "    -ca <use CA> -  Use a CA to generate the crypto material"
+  echo "    -ca <use CA> -  Use a CA to generate the crypto material(使用CA来生成加密材料)"
   echo "    -t <timeout> - CLI timeout duration in seconds (defaults to 10)"
   echo "    -d <delay> - delay duration in seconds (defaults to 3)"
   echo "    -s <dbtype> - the database backend to use: goleveldb (default) or couchdb"
@@ -81,7 +81,7 @@ function generateOrg3() {
 
   fi
 
-  # Create crypto material using Fabric CA
+  # Create crypto material using Fabric CA(使用Fabric CA创建加密材料)
   if [ "$CRYPTO" == "Certificate Authorities" ]; then
     fabric-ca-client version > /dev/null 2>&1
     if [[ $? -ne 0 ]]; then

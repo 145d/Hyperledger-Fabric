@@ -1,0 +1,76 @@
+{
+	"name": "test-network",
+	"version": "1.0.0",
+	"client": {
+		"tlsEnable": true,
+		"adminCredential": {
+			"id": "exploreradmin",
+			"password": "exploreradminpw"
+		},
+		"enableAuthentication": false,
+		"organization": "Org1MSP",
+		"connection": {
+			"timeout": {
+				"peer": {
+					"endorser": "300"
+				},
+				"orderer": "300"
+			}
+		}
+	},
+	"channels": {
+		"carbonchain": {
+			"peers": {
+				"peer0.org1.example.com": {}
+			}
+                }
+	},
+	"organizations": {
+		"Org1MSP": {
+			"mspid": "Org1MSP",
+			"adminPrivateKey": {
+				"path": "/tmp/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/keystore/f11ba56414c351c605954bdceb49d41743c3549c43c9162b89b51f3e0b6e06be_sk"
+			},
+			"peers": ["peer0.org1.example.com"],
+			"signedCert": {
+				"path": "/tmp/crypto/peerOrganizations/org1.example.com/users/Admin@org1.example.com/msp/signcerts/cert.pem"
+			}
+		}
+	},
+	"peers": {
+		"peer0.org1.example.com": {
+			"tlsCACerts": {
+				"path": "/tmp/crypto/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt"
+			},
+			"url": "grpcs://peer0.org1.example.com:7051"
+		},
+		"peer0.org2.example.com": {
+				"tlsCACerts": {
+						"path": "/tmp/crypto/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt"
+				},  
+				"url": "grpcs://peer0.org2.example.com:9051"
+		}
+	},
+	"orderers": {  
+		"orderer.example.com": {
+			"tlsCACerts": {
+                                "path": "/tmp/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/tls/ca.crt"
+			},
+			"url": "grpcs://orderer.example.com:7050"
+		},
+		"orderer2.example.com": {
+				"tlsCACerts": {
+						"path": "/tmp/crypto/ordererOrganizations/example.com/orderers/orderer2.example.com/tls/ca.crt"
+				},
+				"url": "grpcs://orderer2.example.com:7050"
+		},
+		"orderer3.example.com": {
+				"tlsCACerts": {
+						"path": "/tmp/crypto/ordererOrganizations/example.com/orderers/orderer3.example.com/tls/ca.crt"
+				},
+				"url": "grpcs://orderer3.example.com:7050"
+		}
+
+    }
+}
+
