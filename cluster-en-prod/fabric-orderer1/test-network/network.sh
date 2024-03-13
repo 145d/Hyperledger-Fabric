@@ -228,7 +228,7 @@ function createOrgs() {
 
     while :
     do
-      if [ ! -f "organizations/fabric-ca/ordererOrg/tls-cert.pem" ]; then
+      if [ ! -f "organizations/fabric-ca/org1/tls-cert.pem" ]; then
         sleep 1
       else
         break
@@ -247,8 +247,8 @@ function createOrgs() {
 
   fi
 
-  #infoln "Generating CCP files for Org1 and Org2(生成组织1和组织2的CCP文件)"
-  #./organizations/ccp-generate.sh
+  infoln "Generating CCP files for Org1 and Org2(生成组织1和组织2的CCP文件)"
+  ./organizations/ccp-generate.sh
 }
 
 # Once you create the organization crypto material, you need to create the
@@ -334,7 +334,7 @@ function createChannel() {
 }
 
 
-## Call the script to deploy a chaincode to the channel
+## Call the script to deploy a chaincode to the channel(调用脚本将链码部署到通道)
 function deployCC() {
   scripts/deployCC.sh $CHANNEL_NAME $CC_NAME $CC_SRC_PATH $CC_SRC_LANGUAGE $CC_VERSION $CC_SEQUENCE $CC_INIT_FCN $CC_END_POLICY $CC_COLL_CONFIG $CLI_DELAY $MAX_RETRY $VERBOSE
 
@@ -343,12 +343,12 @@ function deployCC() {
   fi
 }
 
-## Call the script to deploy a chaincode to the channel
+## Call the script to deploy a chaincode to the channel(调用脚本将链码部署到通道)
 function deployCCAAS() {
   scripts/deployCCAAS.sh $CHANNEL_NAME $CC_NAME $CC_SRC_PATH $CCAAS_DOCKER_RUN $CC_VERSION $CC_SEQUENCE $CC_INIT_FCN $CC_END_POLICY $CC_COLL_CONFIG $CLI_DELAY $MAX_RETRY $VERBOSE $CCAAS_DOCKER_RUN
 
   if [ $? -ne 0 ]; then
-    fatalln "Deploying chaincode-as-a-service failed"
+    fatalln "Deploying(部署) chaincode-as-a-service failed"
   fi
 }
 
@@ -655,8 +655,20 @@ elif [ "$MODE" == "deployCC" ]; then
   infoln "deploying chaincode on channel '${CHANNEL_NAME}'"
   deployCC
 elif [ "$MODE" == "deployCCAAS" ]; then
-  infoln "deploying chaincode-as-a-service on channel '${CHANNEL_NAME}'"
+  infoln "deploying chaincode-as-a-service on channel(在通道上部署链码即服务) '${CHANNEL_NAME}'"
   deployCCAAS
+# ./network.sh deployCCAAS 和 ./network.sh deployCC 这两个命令通常用于 Hyperledger Fabric 区块链网络的部署和链码的安装。它们之间的区别如下：
+
+# 1、./network.sh deployCCAAS:
+# 这个命令通常用于部署一个基于 Hyperledger Fabric 的联盟链服务（如 CCAAS，Chaincode as a Service）。
+# 在这个过程中，会部署整个区块链网络，并提供链码作为一项服务，以便应用程序可以与链码进行交互。
+# 可能会包括创建通道、加入对等节点、安装链码、实例化链码等操作，以便建立一个完整的区块链网络环境并提供链码服务。
+
+# 2、./network.sh deployCC:
+# 这个命令通常用于在已经搭建好的 Hyperledger Fabric 区块链网络上安装和实例化链码。
+# 在这个过程中，不会重新部署整个区块链网络，只是针对已有的网络进行链码的安装和实例化操作。
+# 可以选择指定通道、对等节点等信息来安装和实例化链码，而无需重新创建整个区块链网络。
+# 因此，./network.sh deployCCAAS 更倾向于部署整个区块链网络并提供链码服务，而./network.sh deployCC 更适用于在已有的区块链网络上进行链码的安装和实例化操作。具体使用哪个命令取决于你的部署需求和当前的区块链网络状态。
 elif [ "$MODE" == "cc" ] && [ "$SUBCOMMAND" == "package" ]; then
   packageChaincode
 elif [ "$MODE" == "cc" ] && [ "$SUBCOMMAND" == "list" ]; then

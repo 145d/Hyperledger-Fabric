@@ -93,7 +93,7 @@ function printHelp() {
     println "  network.sh \033[0;32mdeployCCAAS\033[0m [Flags]"
     println
     println "    Flags:"
-    println "    -c <channel name> - Name of channel to deploy chaincode to"
+    println "    -c <channel name> - Name of channel to deploy chaincode to(要将链码部署到的通道名称)"
     println "    -ccn <name> - Chaincode name."
     println "    -ccv <version>  - Chaincode version. 1.0 (default), v2, version3.x, etc"
     println "    -ccs <sequence>  -  Chaincode definition sequence.  Must be auto (default) or an integer, 1 , 2, 3, etc"
@@ -105,7 +105,7 @@ function printHelp() {
     println
     println "    -h - Print this message"
     println
-    println " Possible Mode and flag combinations"
+    println " Possible Mode and flag combinations(可能的模式和标志组合)"
     println "   \033[0;32mdeployCC\033[0m -ccn -ccv -ccs -ccp -cci -r -d -verbose"
     println
     println " Examples:"

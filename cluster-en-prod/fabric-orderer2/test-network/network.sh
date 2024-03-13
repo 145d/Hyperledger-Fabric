@@ -235,22 +235,22 @@ function createOrgs() {
       fi
     done
 
-    infoln "Creating Org1 Identities"
+    #infoln "Creating Org1 Identities"
 
-    createOrg1
+    #createOrg1
 
-    infoln "Creating Org2 Identities"
+    #infoln "Creating Org2 Identities"
 
-    createOrg2
+    #createOrg2
 
-    infoln "Creating Orderer Org Identities"
+    #infoln "Creating Orderer Org Identities"
 
-    createOrderer
+    #createOrderer
 
   fi
 
-  infoln "Generating CCP files for Org1 and Org2"
-  ./organizations/ccp-generate.sh
+  #infoln "Generating CCP files for Org1 and Org2"
+  #./organizations/ccp-generate.sh
 }
 
 # Once you create the organization crypto material, you need to create the

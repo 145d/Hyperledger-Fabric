@@ -1,5 +1,7 @@
 # Running Chaincode as Service with the Test Network
 
+# (对应链接)https://hyperledger-fabric.readthedocs.io/en/release-2.5/cc_basic.html#running-external-chaincode-builders
+
 The chaincode-as-a-service feature is a very useful and practical way to run 'Smart Contracts'. Traditionally the Fabric Peer has taken on the role of orchestrating the complete lifecycle of the chaincode. It required access to the Docker Daemon to create images, and start containers. Java, Node.js and Go chaincode frameworks were explicitly known to the peer including how they should be built and started.
 
 As a result this makes it very hard to deploy into Kubernetes (K8S) style environments, or to run in any form of debug mode. Additionally, the code is being rebuilt by the peer therefore there is some degree of uncertainty about what dependencies have been pulled in.
@@ -12,7 +14,7 @@ We need to use the latest 2.4.1 release as this contains some improvements to ma
 
 - The docker image for the peer contains a builder for chaincode-as-a-service preconfigured. This is named 'ccaasbuilder'. This removes the need to build your own external builder and repackage and configure the peer
 - The `ccaasbuilder` applications are included in the binary tgz archive download for use in other circumstances. The `sampleconfig/core.yaml` is updated as well to refer to 'ccaasbuilder'
-- The 2.4.1 Java Chaincode release has been updated to remove the need to write a custom bootstrap main class, similar  to the Node.js Chaincode. It is intended that this will be added to the go chaincode as well.
+- The 2.4.1 Java Chaincode release has been updated to remove the need to write a custom bootstrap main class, similar to the Node.js Chaincode. It is intended that this will be added to the go chaincode as well.
 
 ## End-to-end with the the test-network
 
@@ -69,7 +71,7 @@ export FABRIC_CFG_PATH=${PWD}/../config
 peer chaincode query -C mychannel -n basicts -c '{"Args":["org.hyperledger.fabric:GetMetadata"]}' | jq
 ```
 
-If you don't have `jq` installed omit `| jq`.  The metadata shows the details of the deployed contract and is JSON, so jq makes it easier to read.  You can repeat the above commands for org2 to confirm that is working.
+If you don't have `jq` installed omit `| jq`. The metadata shows the details of the deployed contract and is JSON, so jq makes it easier to read. You can repeat the above commands for org2 to confirm that is working.
 
 To run the Java example, change the `deployCCAAS` command as follows. This will create two new containers.
 
@@ -174,7 +176,7 @@ For Java please note:
 
 - Port 800 is forwarded, the debug port for the JVM
 - `-e DEBUG=true` will trigger the node runtime to be started in debug mode. This is encoded in the `docker/docker-entrypoint.sh` script - this is an example and you may wish to remove this in production images for security
-- In the java command with the option to start the debugger is `java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=0.0.0.0:8000 -jar /chaincode.jar`   Note the `0.0.0.0` as the debug port needs to be bound to all network adapters so the debugger can be attached from outside the container
+- In the java command with the option to start the debugger is `java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=0.0.0.0:8000 -jar /chaincode.jar` Note the `0.0.0.0` as the debug port needs to be bound to all network adapters so the debugger can be attached from outside the container
 
 ## Running with multiple peers
 
